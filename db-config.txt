@@ -1,0 +1,116 @@
+\dn #Mostrar esquemas
+\dt #Mostrar tablas
+\l #Mostrar base de datos
+\c #conectar
+\du #Mostrar roles y usuarios
+
+CREATE DATABASE impulsadb
+    WITH
+    OWNER = admindb
+    TEMPLATE = template0
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'es_PE.utf8'
+    LC_CTYPE = 'es_PE.utf8';
+GRANT all privileges ON database impulsadb TO admindb;
+ALTER DATABASE test SET datestyle TO 'ISO, DMY';
+CREATE SCHEMA acc;
+CREATE ROLE ro_acc;
+CREATE ROLE rw_acc;
+GRANT CONNECT ON DATABASE impulsadb TO ro_acc;
+GRANT CONNECT ON DATABASE impulsadb TO rw_acc;
+GRANT USAGE ON SCHEMA acc TO ro_acc;
+GRANT USAGE ON SCHEMA acc TO rw_acc;
+ALTER DEFAULT PRIVILEGES IN SCHEMA acc GRANT SELECT ON TABLES TO ro_acc;
+ALTER DEFAULT PRIVILEGES IN SCHEMA acc GRANT SELECT, INSERT, UPDATE ON TABLES TO rw_acc;
+ALTER DEFAULT PRIVILEGES IN SCHEMA acc GRANT SELECT, INSERT, UPDATE ON TABLES TO full_rw;
+CREATE USER erika_rm WITH PASSWORD '46084122';
+CREATE USER lucy_qp WITH PASSWORD '76057495';
+CREATE USER gestion_ei WITH PASSWORD '677015';
+GRANT rw_acc TO lucy_qp;
+GRANT rw_acc TO erika_rm;
+GRANT ro_acc TO gestion_ei;
+ALTER USER lucy_qp SET search_path TO acc,public;
+ALTER USER erika_rm SET search_path TO acc,public;
+ALTER USER gestion_ei SET search_path TO acc,public;
+REVOKE ALL ON SCHEMA public FROM rw_acc;
+REVOKE ALL ON SCHEMA public FROM ro_acc;
+REVOKE ALL ON SCHEMA public FROM full_rw;
+GRANT USAGE ON ALL SEQUENCES IN SCHEMA acc TO rw_acc;
+GRANT USAGE ON ALL SEQUENCES IN SCHEMA acc TO full_rw;
+GRANT USAGE ON ALL SEQUENCES IN SCHEMA acc TO readwrite;
+GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA acc TO rw_acc;
+GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA acc TO full_rw;
+GRANT USAGE ON ALL TRIGGERS IN SCHEMA acc TO readwrite;
+
+
+
+
+\copy acc._5(entity_id,periodo_tributario,tipo_operacion,tipo_comprobante,fecha_emision,numero_serie,numero_correlativo,tipo_documento,numero_documento,destino,valor,icbp,isc,otros_cargos,tipo_moneda,tasa_detraccion,medio_pago,tasa_percepcion,tipo_comprobante_modificado,numero_serie_modificado,numero_correlativo_modificado,numero_final,fecha_vencimiento,glosa) FROM 'D:/ventas.csv' WITH NULL AS 'NULL' DELIMITER ',' CSV HEADER;
+
+\copy acc._8(entity_id,periodo_tributario,tipo_operacion,tipo_comprobante,fecha_emision,numero_serie,numero_correlativo,tipo_documento,numero_documento,destino,valor,icbp,isc,otros_cargos,tipo_moneda,clasificacion_bienes_servicios,tasa_detraccion,medio_pago,tipo_comprobante_modificado,numero_serie_modificado,numero_correlativo_modificado,glosa,tasa_percepcion,fecha_vencimiento,importe_final) FROM 'D:/compras.csv' WITH NULL AS 'NULL' DELIMITER ',' CSV HEADER;
+
+\copy acc.itrade (tipo_operacion,cui_relacionado,codigo_aduana,periodo_tributario,numero_correlativo,fecha_numeracion,fecha_embarque,fecha_regularizacion,valor_fob,peso_neto) FROM 'D:/itrade.csv' WITH NULL AS 'NULL' DELIMITER ',';
+
+
+WITH NULL AS E'\'\'
+
+\copy anexado TO 'D:\anexado.csv' delimiters ',';
+
+\copy acc.entities (entity_id, nombre_razon, numero_documento, telefono, email, domicilio_fiscal, distrito, ciudad, departamento, codigo_postal, usuario_sol, clave_sol) FROM 'D:/entities.csv' DELIMITER ';' CSV HEADER;
+
+\copy acc._8 (entity_id,periodo_tributario,tipo_operacion,tipo_comprobante,fecha_emision,numero_serie,numero_correlativo,tipo_documento,numero_documento,destino,valor,icbp,isc,otros_cargos,tipo_moneda,clasificacion_bienes_servicios,tasa_detraccion,fecha_constancia_detraccion,numero_constancia_detraccion,medio_pago,tipo_comprobante_modificado,numero_serie_modificado,numero_correlativo_modificado,glosa,cui,tasa_percepcion,fecha_vencimiento,importe_final) FROM 'D:/08.csv' DELIMITER ',' CSV HEADER;
+
+\copy acc._5(entity_id,periodo_tributario,tipo_operacion,tipo_comprobante,fecha_emision,numero_serie,numero_correlativo,tipo_documento,numero_documento,destino,valor,icbp,isc,otros_cargos,tipo_moneda,tasa_detraccion,medio_pago,tasa_percepcion,numero_serie_percepcion,numero_correlativo_percepcion,tipo_comprobante_modificado,numero_serie_modificado,numero_correlativo_modificado,numero_final,fecha_vencimiento,glosa) FROM 'D:/05.csv' DELIMITER ',' CSV HEADER;
+
+
+\copy (select * from preliquidacion_general(202201)) to 'D:/preliqui.csv' DELIMITER ',' CSV HEADER;
+
+
+SELECT entity_id,periodo_tributario,tipo_operacion,tipo_comprobante,fecha_emision,numero_serie,numero_correlativo,tipo_documento,numero_documento,destino,valor,tipo_moneda FROM acc._08;
+
+
+
+ALTER TABLE "public"."mitabla"
+> SET SCHEMA "nuevoesquema";
+
+cmd /c chcp 1252
+
+
+100(VENTAS GRAVADAS) = Sumar valor si no es "nota de crédito" y no es "no gravada" - Sumar valor si es "nota de crédito", no es "no gravada" y la fecha del comprobante modificado está dentro del periodo.
+
+102(DESCUENTOS Y DEVOLUCIONES) = Sumar valor si es "nota de crédito", no es "no gravada" y la fecha del comprobante modificado es anterior al periodo.
+
+109(VENTAS NO GRAVADAS SIN EFECTO EN RATIO) = Sumar valor si no es "exportacion", no es "nota de crédito" y es "no gravada" - Sumar valor sino es "exportacion", es "nota de crédito" y es "no gravada" + Sumar otros cargos si no es "exportacion", no es "nota de crédito" y es mixta - Sumar otros cargos si no es "exportacion", es "nota de crédito" y es mixta.
+ 
+
+106(EXPORTACIONES FACTURADAS EN EL PERIODO) =  Sumar valor si es "exportacion" y no es "nota de crédito" - Sumar valor si es "exportacion y es "nota de crédito"
+
+
+127(EXPORTACIONES EMBARCADAS EN EL PERIODO) = Sumar valor si es "exportacion", no es "nota de crédito" y la fecha de embarque es igual al periodo - Sumar valor si es "exportacion, es "nota de crédito" y la fecha de embarque es igual al periodo
+
+
+107(COMPRAS NETAS DESTINADAS A VENTAS GRAVADAS) = Sumar valor si es "compra nacional", no es "nota de crédito" y no es "no gravada" - Sumar valor si es "compra nacional", es "nota de crédito" y no es "no gravada".
+
+
+120(COMPRAS NETAS INTERNAS NO GRAVADAS) = Sumar valor si es "compra nacional", no es "nota de crédito" y es "no gravada" + Sumar otros cargos si es "compra nacional", no es "nota de crédito" y es mixta - Sumar valor si es "compra nacional", es "nota de crédito" y es "no gravada" - Sumar otros cargos si es "compra nacional", es "nota de crédito" y es mixta
+
+
+114(COMPRAS NETAS IMPORTADAS DESTINADAS A VENTAS GRAVADAS EXCLUSIVAMENTE) =
+
+
+122(COMPRAS NETAS IMPORTADAS NO GRAVADAS) =
+
+
+
+
+CALL FUNCTION asignar_periodo
+
+SELECT asignar_periodo('{id1,id2,id3,idn}',periodo,subdiario)
+
+
+
+
+
+
+
+

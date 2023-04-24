@@ -1,0 +1,123 @@
+359;Efectivo y equivalente en efectivo
+360;Inversiones Financieras
+361;Cuentas por cobrar comerciales – terceros
+362;Cuentas por cobrar comerciales – relac
+363;Cuentas por cobrar al personal, acc (socios) y directores
+364;Cuentas por Cobrar diversas - terceros
+365;Cuentas por Cobrar diversas - relacionadas
+366;Servicios y otros contratados por anticipado
+367;Estimación de Cuentas de Cobranza Dudosa
+368;Mercaderías
+369;Productos Terminados
+370;Subproductos, desechos y desperdicios
+371;Productos en proceso
+372;Materias prima
+373;Materiales auxiliares, suministros y repuestos
+374;Envases y embalajes
+375;Inventarios por recibir
+376;Desvalorización de Inventarios
+377;Activos no corrientes mantenidos para la venta
+378;Otros activos corrientes
+379;Inversiones Mobiliarias
+380;Propiedades de Inversión (1)
+381;Activos por derecho de uso (2)
+382;Propiedades, Planta y Equipo
+383;Depreciación de (1), (2) y PPE acumulados
+384;Intangibles
+385;Activos biológicos
+386;Deprec. Act. biológico y amortiz. Acumulada
+387;Desvalorización de activo inmovilizado
+388;Activo diferido
+389;Otros activos no corrientes
+390;Total activo Neto
+401;Sobregiros bancarios
+402;Tributos y aportes al sistema de pensiones y de salud por pagar
+403;Remuneraciones y participaciones por pagar
+404;Cuentas por pagar comerciales – terceros
+405;Cuentas por pagar comerciales – relacionadas
+406;Cuentas por pagar a los accionistas (socios, particip) y directores
+407;Cuentas por pagar diversas – terceros
+408;Cuentas por pagar diversas – relacionadas
+409;Obligaciones financieras
+410;Provisiones
+411;Pasivo diferido
+412;TOTAL PASIVO
+414;Capital
+415;Acciones de inversión
+416;Capital adicional positivo
+417;Capital adicional negativo
+418;Resultados no realizados
+419;Excedente de revaluación
+420;Reservas
+421;Resultados Acumulados Positivo
+422;Resultados Acumulados Negativos
+423;Utilidad del Ejercicio
+424;Pérdida del Ejercicio
+425;TOTAL PATRIMONIO
+426;TOTAL PASIVO Y PATRIMONIO
+461;Ventas Netas o Ing. por Servicios
+462;Desc., rebajas y bonif. concedidas
+463;Ventas Netas
+464;Costo de Ventas
+466;Resultado bruto  Utilidad
+467;Resultado bruto  Perdida
+468;Gastos de Ventas
+469;Gastos de Administración
+470;Resultado de operación Utilidad
+471;Resultado de operación Perdida
+472;Gastos Financieros
+650;Ingresos Financieros Gravados
+651;Ingresos Financieros por diferencia de tipo de cambio
+473;Ingresos Financieros
+475;Otros Ingresos gravados
+476;Otros Ingresos no gravados
+432;Ingresos Afectos
+433;Ingresos Exonerados
+477;Enajen. de val. y bienes del Act. F.
+478;Costo enajen, de val.y bienes A.F.
+480;Gastos diversos
+481;REI del ejercicio positivo
+483;REI del ejercicio negativo
+484;Resultado antes de part. Utilidad
+485;Resultado antes de part. Perdida
+486;Distribución legal de la renta
+487;Resultado antes del imp. Utilidad
+489;Resultado antes del imp. Perdida
+490;Impuesto a la Renta
+492;Resultado del ejercicio  Utilidad
+493;Resultado del ejercicio  Perdida
+100;Utilidad antes de adiciones y deducciones
+101;Pérdida antes de adiciones y deducciones
+103;Adiciones para determinar la renta imponible
+105;Deducciones para determinar la renta imponible
+106;Renta neta del ejercicio casilla (100 ó 101) + casilla 103 – casilla 105
+107;Pérdida neta del ejercicio casilla (100 ó 101) + casilla 103 – casilla 105
+120;Ingresos exonerados
+108;Pérdidas netas compensables y/o aplicación de ejercicios
+110;Renta neta imponible casilla 106 – casilla 108
+113;Total impuesto a la Renta
+111;Saldo de pérdidas no compensadas
+610;Coeficiente o percentaje para el cálculo del pago a cuenta
+686;Coeficiente o porcentaje
+123;Crédito por impuesto a la renta de fuente extranjera
+136;Crédito por reinversiones
+134;Crédito por inversión y/o reinversión – Ley del Libro
+126;Pagos a cuenta del Impuesto a la Renta acreditados contra el ITAN
+125;Otros créditos sin derecho a devolución
+504;Sub Total (Cas. 113 – (123+136+134+126+125))
+127;Saldo a favor no aplicado del ejercicio anteiror
+128;Pagos a cuenta mensuales del ejercicio
+130;Retenciones renta de tercera categoria
+129;Otros créditos con derecho a devolución
+506;Sub Total (Cas. 504 – (127+128+130+129))
+131;Pagos del ITAN (no incluir monto compensado contra pagos a cta de Rta.)
+279;Saldo del ITAN no aplicado como crédito
+137;Devolución
+138;Aplicación contra futuros pagos a cuenta y/o regularización
+139;A favor del fisco
+505;Total deuda tributaria
+141;Saldo a favor del exportador
+144;Pagos realizados con anterioridad a la presentación de este formulario
+145;Interés moratorio
+146;Saldo de la deuda tributaria
+180;Importe a pagar
